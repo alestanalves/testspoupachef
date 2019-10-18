@@ -17,3 +17,34 @@ else:
         count += 1
     print(termo)
 ```
+
+## Test 3
+
+```
+alfab = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def pegarcoluna(num):
+    num_colu = 1
+    min_range, max_range = 1, 26
+    while num > max_range:
+        num_colu += 1
+        min_range = max_range
+        max_range += len(alfab) ** num_colu
+
+    chars = list()
+    for _ in range(num_colu):
+        intervalo = ((max_range - min_range + 1) // len(alfab))
+        colu_pos = 0
+        prev, curr = min_range, min_range + intervalo
+        while num >= curr:
+            colu_pos += 1
+            prev = curr
+            curr = prev + intervalo
+        chars.append(alfab[colu_pos])
+        num -= prev
+        min_range, max_range = prev, curr
+
+    return "".join(chars)
+
+# Para testar coloque > pegarcoluna(1) o número é correspondente a coluna respectiva
+``` 
